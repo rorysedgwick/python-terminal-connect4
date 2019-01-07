@@ -15,16 +15,9 @@ def show_board(board):
     print(' '.join(row))
   print('\n')
 
-def take_turn(turn_number, board, board_config, player_config):
-  if turn_number % 2 == 0:
-    player = player_config[0]
-    counter = player_config[2]
-  else:
-    player = player_config[1]
-    counter = player_config[3]
+def take_turn(player, counter, board, board_tile):
 
   valid_column = False
-  board_tile = board_config[2]
 
   while not valid_column:
     print(player + ': Select a column:')
@@ -53,12 +46,8 @@ def add_counter_to_board(board, board_tile, counter, col):
       break
   return board
 
-def four_connected(board, counters):
-
-  connect_four = False
-  for counter in counters:
-    connect_four = check_for_connect_four(board, counter)
-
+def four_connected(board, counter):
+  connect_four = check_for_connect_four(board, counter)
   return connect_four
 
 def check_for_connect_four(board, counter):
@@ -109,18 +98,27 @@ def connect_four():
 
   clear()
   board = create_board(board_config)
+  maximum_moves = board_config[0] * board_config[1]
+  board_tile = board_config[2]
   counters = player_config[2:4]
 
   show_board(board)
-  turn_number = 0
 
-  while not four_connected(board, counters):
-    new_board = take_turn(turn_number, board, board_config, player_config)
+  for i in range(maximum_moves):
+    if i % 2 == 0:
+      player = player_config[0]
+      counter = player_config[2]
+    else:
+      player = player_config[1]
+      counter = player_config[3]
+    
+    new_board = take_turn(player, counter, board, board_tile)
     show_board(new_board)
-    turn_number += 1
 
-    if four_connected(new_board, counters):
+    if four_connected(new_board, counter):
       print('We have a winner!')
+      print('Congratulations {}'.format(player))
+      print('\n')
       sys.exit()
 
 connect_four()
