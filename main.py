@@ -24,10 +24,11 @@ def take_turn(player, counter, board, board_tile):
     col = int(input());
     valid_column = validate_input(board, board_tile, col)
 
-    new_board = add_counter_to_board(board, board_tile, counter, col)
+  new_board = add_counter_to_board(board, board_tile, counter, col)
   return new_board
 
 def validate_input(board, board_tile, col):
+  print('col: ', col)
   if col > len(board[0]):
     print('Pick a column between 0 and ' + str(len(board[0])))
     return False
@@ -61,6 +62,12 @@ def check_horizontal(board, counter):
       else:
         continue
   return False
+
+def check_vertical(board, counter):
+  pass
+
+def check_diagonal(board, counter):
+  pass
 
 def initialize_players():
   print('Player 1: Enter your name:')
@@ -117,8 +124,7 @@ def connect_four():
 
     if four_connected(new_board, counter):
       print('We have a winner!')
-      print('Congratulations {}'.format(player))
-      print('\n')
+      print('Congratulations {}'.format(player), end='\n')
       sys.exit()
 
 connect_four()
