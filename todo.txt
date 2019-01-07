@@ -1,0 +1,5 @@
+[ ] validate user inputs (names, moves, counters etc)
+[ ] dependency management
+[ ] local python env
+[ ] add unit tests for validating connect_four, at a minimum
+[ ] add command line colours
