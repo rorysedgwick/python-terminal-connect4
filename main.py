@@ -26,12 +26,12 @@ def take_turn(turn_number, board, board_config, player_config):
   valid_column = False
   board_tile = board_config[2]
 
- while not valid_column:
-   print(player + ': Select a column:')
-   col = int(input());
-   valid_column = validate_input(board, board_tile, col)
+  while not valid_column:
+    print(player + ': Select a column:')
+    col = int(input());
+    valid_column = validate_input(board, board_tile, col)
 
-  new_board = add_counter_to_board(board, board_tile, counter, col)
+    new_board = add_counter_to_board(board, board_tile, counter, col)
   return new_board
 
 def validate_input(board, board_tile, col):
@@ -107,12 +107,12 @@ def connect_four():
     player_config = initialize_players()
     board_config = initialize_board()
 
-    clear()
-    board = create_board(board_config)
-    counters = player_config[2:4]
+  clear()
+  board = create_board(board_config)
+  counters = player_config[2:4]
 
-    show_board(board)
-    turn_number = 0
+  show_board(board)
+  turn_number = 0
 
   while not four_connected(board, counters):
     new_board = take_turn(turn_number, board, board_config, player_config)
