@@ -28,7 +28,6 @@ def take_turn(player, counter, board, board_tile):
   return new_board
 
 def validate_input(board, board_tile, col):
-  print('col: ', col)
   if col > len(board[0]):
     print('Pick a column between 0 and ' + str(len(board[0])))
     return False
@@ -52,19 +51,25 @@ def four_connected(board, counter):
   return connect_four
 
 def check_for_connect_four(board, counter):
-  return check_horizontal(board, counter)
+  return check_horizontal(board, counter) or check_vertical(board, counter)
 
 def check_horizontal(board, counter):
   for row in board:
-    for i in range(len(row) - 4):
-      if row[i] == counter and row[i+1] == counter and row[i+2] == counter and row[i+3] == counter:
+    for col in range(len(row) - 3):
+      if row[col] == counter and row[col+1] == counter and row[col+2] == counter and row[col+3] == counter:
         return True
       else:
         continue
   return False
 
 def check_vertical(board, counter):
-  pass
+  for col in range(len(board[0])):
+    for row in range(len(board) - 3):
+      if board[row][col] == counter and board[row+1][col] == counter and board[row+2][col] == counter and board[row+3][col] == counter:
+        return True
+      else:
+        continue
+  return False
 
 def check_diagonal(board, counter):
   pass
